@@ -34,12 +34,6 @@ but its performance on the test set is not too bad.
 
 Also, I checked that estimating the target field as an average of the sensor values does not work.
 
-# Future steps
-
-- Optimize the network hyperparameters to reduce overfitting.
-- Expand the dataset, especially toward the smallest values.
-- Test with a different sensor arrangement. I don’t think a cubic arrangement is possible in the actual experiment.
-- Determine the minimal number of sensors needed.
 
 # Content
 ## Simulation
@@ -47,6 +41,19 @@ Also, I checked that estimating the target field as an average of the sensor val
 * [deep_learning.ipynb](https://github.com/tretyakovmipt/magnetic-field-triangulation-via-deep-learning/blob/main/simulation/deep_learning.ipynb) uses the simulated data sets for training and testing a network performing triangulation based on vector values.
 * [deep_learning_1D.ipynb](https://github.com/tretyakovmipt/magnetic-field-triangulation-via-deep-learning/blob/main/simulation/deep_learning_1D.ipynb) uses the simulated data sets for training and testing a network performing triangulation based on scalar values.
 
+## Experiment
+* [magnetometer_data](https://github.com/tretyakovmipt/magnetic-field-triangulation-via-deep-learning/tree/main/experiment/experimental_data/magnitometer_data) has the data measurements recorded overal several experimental runs.
+* [1D_triangulation.h5](https://github.com/tretyakovmipt/magnetic-field-triangulation-via-deep-learning/blob/main/experiment/1D_triangulation.h5) - saved trained neural network.
+* [all_data.h5](https://github.com/tretyakovmipt/magnetic-field-triangulation-via-deep-learning/blob/main/experiment/all_data.h5) - all recorded measurements combined into a single dataset.
+* [short_data.h5](https://github.com/tretyakovmipt/magnetic-field-triangulation-via-deep-learning/blob/main/experiment/short_data.h5) - data set with average magnetic field values corresponding to each time step.
+* [data_analysis.ipynb](https://github.com/tretyakovmipt/magnetic-field-triangulation-via-deep-learning/blob/main/experiment/data_analysis.ipynb) - combines all the measurements into a single dataset (all_data.h5) and creates a cleaner data set with just average values (short_data.h5).
+* [training.ipynb](https://github.com/tretyakovmipt/magnetic-field-triangulation-via-deep-learning/blob/main/experiment/training.ipynb) - training and testing the triangulation network on the real data.
 
+# Future steps
 
+- Optimize the network hyperparameters to reduce overfitting.
+- Expand the dataset, especially toward the smallest values.
+- Test with a different sensor arrangement. I don’t think a cubic arrangement is possible in the actual experiment.
+- Determine the minimal number of sensors needed.
+- Find a way to record all three components of the target magnetic field at once.
 
