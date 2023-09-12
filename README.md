@@ -50,10 +50,10 @@ Also, I checked that estimating the target field as an average of the sensor val
 * [training.ipynb](https://github.com/tretyakovmipt/magnetic-field-triangulation-via-deep-learning/blob/main/experiment/training.ipynb) - training and testing the triangulation network on the real data.
 
 # Future steps
-
-- Optimize the network hyperparameters to reduce overfitting.
-- Expand the dataset, especially toward the smallest values.
 - Test with a different sensor arrangement. I don’t think a cubic arrangement is possible in the actual experiment.
 - Determine the minimal number of sensors needed.
 - Find a way to record all three components of the target magnetic field at once.
+- Expand the dataset, especially toward the smaller values.
+- Optimize the network hyperparameters to reduce overfitting.
+
 
