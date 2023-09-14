@@ -28,16 +28,22 @@ Before working with real data, I performed a magnetic field simulation to test i
 
 
 # Results
+## Simulation
+More details can be found in the Jupyter notebooks in Simulation folder.
+
+I ended up with a simple fully-connected network that makes a prediction based on scalar measurements.
 
 The network overfits a bit, 
 
-![Fig. 3](cnn-training.png).
+![Fig. 3](cnn-training.png),
 
 but its performance on the test set is not too bad.
 
 ![Fig. 4](cnn-test.png).
 
 Also, I checked that estimating the target field as an average of the sensor values does not work.
+
+## Experiment
 
 
 # Content
