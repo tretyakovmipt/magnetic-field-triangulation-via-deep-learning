@@ -10,9 +10,13 @@ A bio-sample is sandwiched between an electromagnet and a lightguide. The lightg
 
 # Motivation
 
-The goal is to check that the magnet [calibration](https://github.com/tretyakovmipt/TIRF-magnet-calibration), which depends on how it is set up with respect to the sample, is correct.
+The main goal is to be able to measure a magnetic field at a location where it is not possible to have a sensor during the experiment. In the setup described above, that would be the magnetic field inside the bio-sample. 
 
-Provided the sensors are attached to the TIRF platform, we’ll be able to tell the magnetic field at the sample, even if the magnet’s position or orientation with respect to the sample has changed or if there was a change in the ambient field. If it’s not what we expect, the magnet needs to be recalibrated.
+Provided the sensors are attached to the TIRF platform, we’ll be able to tell the magnetic field at the sample, even if the magnet’s position or orientation with respect to the sample has changed or if there was a change in the ambient field. 
+
+Mangetic field triangulation can be useful in other types of experiments, e.g., in AMO physics, where one could tringulate the field inside of a vacuum chamber.
+
+In addition, the triangulation principle can be generalized to other types of measurements other than magnetic fields, as long as there is clear dependence between values at several locations.
 
 # Neural network
 
