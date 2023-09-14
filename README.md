@@ -18,13 +18,14 @@ Mangetic field triangulation can be useful in other types of experiments, e.g., 
 
 In addition, the triangulation principle can be generalized to other types of measurements other than magnetic fields, as long as there is clear dependence between values at several locations.
 
-# Neural network
+# Triangulation Principle
 
-So far, I ended up with a 3-channel 1D convolutional neural network with the following architecture:
+The triangulation is performed by a neutral network that takes measurements from the trinagulating sensors and outputs the field at the target location.
 
-![Fig. 2](cnn_fig.png).
+For the training and testing we need a dataset of measurements from the trinagulating sensors and a sensor at the target location.
 
-The three channels correspond to the magnetic field’s x, y, and z components. For a given voltage, each channel receives an array with the corresponding magnetic field component from all eight sensors. The network outputs an array corresponding to the components of the target field.
+Before working with real data, I performed a magnetic field simulation to test if the tringulation principle works and to choose the most approptiate neural networkk architecture.
+
 
 # Results
 
