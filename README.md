@@ -47,6 +47,10 @@ Also, I checked that estimating the target field as an average of the sensor val
 For the target field measurements I used a lake-shore Tesla meter. For the triangulating sensors I used sensors from Adafruit. We 3D printed a cube (shown below) nesting the trinagulating sensors and fitting the Tesla meter inside. 
 ![Fig. 5](sensor_cube.jpg).
 
+Due to the specifics of the sensors and Tesla meter, we recorded only single component of the magnetic field vector on each of them.
+Each sensor and Tesla meter provides an analog voltage proportional to the measure magnetic feild component, which was recorded with an NI DAQ. Witht the 3D electromagnet, we generated random magnetic field values, which were held constant during a short time step as is shown below.
+
+![Fig. 6](sensor_cube.jpg).
 
 # Content
 ## Simulation
