@@ -54,10 +54,13 @@ Each sensor and Tesla meter provides an analog voltage proportional to the measu
 The experimental sequences were control by a Python script run on LabScript control software. Since LabScript has a limit on how many datapoints it collect during a single run, we had to do several runs and combine them together. 
 
 The network did not seem to work well with noisy data, so I created a cleaner dataset consisting of only the average values from each time step:
+
 ![Fig. 7](noisy_data.jpg).
 ![Fig. 8](clean_data.jpg).
 
+
 The network test is not perfect but kind of work in a proof-of-principle way:
+
 ![Fig. 9](triangulation_test.jpg).
 
 # Content
