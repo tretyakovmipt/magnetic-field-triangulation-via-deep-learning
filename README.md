@@ -44,6 +44,7 @@ but its performance on the test set is not too bad.
 Also, I checked that estimating the target field as an average of the sensor values does not work.
 
 ## Experiment
+For the target field measurements I used a lake-shore Tesla meter. For the triangulating sensors I used sensors from Adafruit. We 3D printed a cube nesting the trinagulating sensors and fitting the Tesla meter inside. 
 
 
 # Content
