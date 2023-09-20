@@ -58,7 +58,7 @@ The network did not seem to work well with noisy data, so I created a cleaner da
 ![Fig. 8](clean_data.jpg).
 
 The network test is not perfect but kind of work in a proof-of-principle way:
-![Fig. 9](triangulation test.jpg).
+![Fig. 9](triangulation_test.jpg).
 
 # Content
 ## Simulation
