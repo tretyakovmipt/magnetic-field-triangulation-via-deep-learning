@@ -58,7 +58,7 @@ The network did not seem to work well with noisy data, so I created a cleaner da
 ![Fig. 7](noisy_data.jpg).
 ![Fig. 8](clean_data.jpg).
 
-
+I train and test the network on the clean data. For the testing I use the data that did not participate in the training process.
 The network test is not perfect but kind of work in a proof-of-principle way:
 
 ![Fig. 9](triangulation_test.jpg).
