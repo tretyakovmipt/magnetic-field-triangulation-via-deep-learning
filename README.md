@@ -49,8 +49,12 @@ For the target field measurements I used a lake-shore Tesla meter. For the trian
 
 Due to the specifics of the sensors and Tesla meter, we recorded only single component of the magnetic field vector on each of them.
 Each sensor and Tesla meter provides an analog voltage proportional to the measure magnetic feild component, which was recorded with an NI DAQ. Witht the 3D electromagnet, we generated random magnetic field values, which were held constant during a short time step as is shown below.
-
 ![Fig. 6](traning_recording.jpg).
+
+The experimental sequences were control by a Python script run on LabScript control software. Since LabScript has a limit on how many datapoints it collect during a single run, we had to do several runs and combine them together. 
+
+The network did not seem to work well with noisy data, so I created a cleaner dataset consisting of only the average values from each time step.
+
 
 # Content
 ## Simulation
