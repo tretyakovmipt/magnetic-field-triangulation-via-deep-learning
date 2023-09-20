@@ -45,7 +45,7 @@ Also, I checked that estimating the target field as an average of the sensor val
 
 ## Experiment
 For the target field measurements I used a lake-shore Tesla meter. For the triangulating sensors I used sensors from Adafruit. We 3D printed a cube (shown below) nesting the trinagulating sensors and fitting the Tesla meter inside. 
-![Fig. 5](sensor_cube.png).
+![Fig. 5](sensor_cube.jpg).
 
 
 # Content
