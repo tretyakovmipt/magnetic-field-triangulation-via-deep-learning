@@ -10,23 +10,32 @@ A bio-sample is sandwiched between an electromagnet and a lightguide. The lightg
 
 # Motivation
 
-The goal is to check that the magnet [calibration](https://github.com/tretyakovmipt/TIRF-magnet-calibration), which depends on how it is set up with respect to the sample, is correct.
+The main goal is to be able to measure a magnetic field at a location where it is not possible to have a sensor during the experiment. In the setup described above, that would be the magnetic field inside the bio-sample. 
 
-Provided the sensors are attached to the TIRF platform, we’ll be able to tell the magnetic field at the sample, even if the magnet’s position or orientation with respect to the sample has changed or if there was a change in the ambient field. If it’s not what we expect, the magnet needs to be recalibrated.
+Provided the sensors are attached to the TIRF platform, we’ll be able to tell the magnetic field at the sample, even if the magnet’s position or orientation with respect to the sample has changed or if there was a change in the ambient field. 
 
-# Neural network
+Mangetic field triangulation can be useful in other types of experiments, e.g., in AMO physics, where one could tringulate the field inside of a vacuum chamber.
 
-So far, I ended up with a 3-channel 1D convolutional neural network with the following architecture:
+In addition, the triangulation principle can be generalized to other types of measurements other than magnetic fields, as long as there is clear dependence between values at several locations.
 
-![Fig. 2](cnn_fig.png).
+# Triangulation Principle
 
-The three channels correspond to the magnetic field’s x, y, and z components. For a given voltage, each channel receives an array with the corresponding magnetic field component from all eight sensors. The network outputs an array corresponding to the components of the target field.
+The triangulation is performed by a neutral network that takes measurements from the trinagulating sensors and outputs the field at the target location.
+
+For the training and testing we need a dataset of measurements from the trinagulating sensors and a sensor at the target location.
+
+Before working with real data, I performed a magnetic field simulation to test if the tringulation principle works and to choose the most approptiate neural networkk architecture.
+
 
 # Results
+## Simulation
+More details can be found in the Jupyter notebooks in Simulation folder.
+
+I ended up with a simple fully-connected network that makes a prediction based on scalar measurements.
 
 The network overfits a bit, 
 
-![Fig. 3](cnn-training.png).
+![Fig. 3](cnn-training.png),
 
 but its performance on the test set is not too bad.
 
@@ -34,15 +43,45 @@ but its performance on the test set is not too bad.
 
 Also, I checked that estimating the target field as an average of the sensor values does not work.
 
-# Future steps
+## Experiment
+For the target field measurements I used a lake-shore Tesla meter. For the triangulating sensors I used sensors from Adafruit. We 3D printed a cube (shown below) nesting the trinagulating sensors and fitting the Tesla meter inside. 
+![Fig. 5](sensor_cube.jpg).
 
-- Optimize the network hyperparameters to reduce overfitting.
-- Expand the dataset, especially toward the smallest values.
-- Test with a different sensor arrangement. I don’t think a cubic arrangement is possible in the actual experiment.
-- Determine the minimal number of sensors needed.
+Due to the specifics of the sensors and Tesla meter, we recorded only single component of the magnetic field vector on each of them.
+Each sensor and Tesla meter provides an analog voltage proportional to the measure magnetic feild component, which was recorded with an NI DAQ. Witht the 3D electromagnet, we generated random magnetic field values, which were held constant during a short time step as is shown below.
+![Fig. 6](traning_recording.jpg).
+
+The experimental sequences were control by a Python script run on LabScript control software. Since LabScript has a limit on how many datapoints it collect during a single run, we had to do several runs and combine them together. 
+
+The network did not seem to work well with noisy data, so I created a cleaner dataset consisting of only the average values from each time step:
+
+![Fig. 7](noisy_data.jpg).
+![Fig. 8](clean_data.jpg).
+
+I train and test the network on the clean data. For the testing I use the data that did not participate in the training process.
+The network test is not perfect but kind of work in a proof-of-principle way:
+
+![Fig. 9](triangulation_test.jpg).
 
 # Content
+## Simulation
+* [generate_field.ipynb](https://github.com/tretyakovmipt/magnetic-field-triangulation-via-deep-learning/blob/main/simulation/generate_field.ipynb) magnetic field simulation that produces training, validation, and test data sets, and saves them to *data/*.
+* [deep_learning.ipynb](https://github.com/tretyakovmipt/magnetic-field-triangulation-via-deep-learning/blob/main/simulation/deep_learning.ipynb) uses the simulated data sets for training and testing a network performing triangulation based on vector values.
+* [deep_learning_1D.ipynb](https://github.com/tretyakovmipt/magnetic-field-triangulation-via-deep-learning/blob/main/simulation/deep_learning_1D.ipynb) uses the simulated data sets for training and testing a network performing triangulation based on scalar values.
 
-[generate_field.ipynb](https://github.com/tretyakovmipt/magnetic-field-triangulation-via-deep-learning/blob/main/generate_field.ipynb) magnetic field simulation to produce training, validation, and test data sets and saves them to *data/*.
+## Experiment
+* [magnetometer_data](https://github.com/tretyakovmipt/magnetic-field-triangulation-via-deep-learning/tree/main/experiment/experimental_data/magnitometer_data) has the data measurements recorded overal several experimental runs.
+* [1D_triangulation.h5](https://github.com/tretyakovmipt/magnetic-field-triangulation-via-deep-learning/blob/main/experiment/1D_triangulation.h5) - saved trained neural network.
+* [all_data.h5](https://github.com/tretyakovmipt/magnetic-field-triangulation-via-deep-learning/blob/main/experiment/all_data.h5) - all recorded measurements combined into a single dataset.
+* [short_data.h5](https://github.com/tretyakovmipt/magnetic-field-triangulation-via-deep-learning/blob/main/experiment/short_data.h5) - data set with average magnetic field values corresponding to each time step.
+* [data_analysis.ipynb](https://github.com/tretyakovmipt/magnetic-field-triangulation-via-deep-learning/blob/main/experiment/data_analysis.ipynb) - combines all the measurements into a single dataset (all_data.h5) and creates a cleaner data set with just average values (short_data.h5).
+* [training.ipynb](https://github.com/tretyakovmipt/magnetic-field-triangulation-via-deep-learning/blob/main/experiment/training.ipynb) - training and testing the triangulation network on the real data.
 
-[deep_learning.ipynb](https://github.com/tretyakovmipt/magnetic-field-triangulation-via-deep-learning/blob/main/deep_learning.ipynb) training and testing the network.
+# Future steps
+- Test with a different sensor arrangement. I don’t think a cubic arrangement is possible in the actual experiment.
+- Determine the minimal number of sensors needed.
+- Find a way to record all three components of the target magnetic field at once.
+- Expand the dataset, especially toward the smaller values.
+- Optimize the network hyperparameters to reduce overfitting.
+
+
